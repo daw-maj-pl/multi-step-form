@@ -1,7 +1,7 @@
+import UserForm from './components/UserForm';
+
 function App() {
-  return (
-    <div>App</div>
-  );
+  return <UserForm />;
 }
 
 export default App;

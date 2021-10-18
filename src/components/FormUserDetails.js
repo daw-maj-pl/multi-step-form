@@ -11,28 +11,28 @@ const useStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar,
     marginBottom: '3em'
   },
-  continueBtn: {
+  btn: {
     margin: 15
   },
-  centerAppBarTitle: {
-    margin: 'auto'
+  title: {
+    flexGrow: 1,
+    textAlign: 'center'
   }
+  // centerAppBarTitle: {
+  //   margin: 'auto'
+  // }
 }));
 
 const FormUserDetails = props => {
-  const { values, handleChange } = props;
+  const { values, nextStep, handleChange } = props;
   const classes = useStyles();
-
-  const handleContinue = e => {
-    e.preventDefault();
-    props.nextStep();
-  };
 
   return (
     <>
       <AppBar>
-        <Toolbar className={classes.centerAppBarTitle}>
-          <Typography>Enter User Details</Typography>
+        {/* <Toolbar className={classes.centerAppBarTitle}> */}
+        <Toolbar>
+          <Typography className={classes.title}>Enter User Details</Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.toolbarMargin} />
@@ -42,7 +42,7 @@ const FormUserDetails = props => {
             placeholder="Enter Your First Name"
             label="First Name"
             onChange={handleChange('firstName')}
-            defaultValue={values.firstName}
+            value={values.firstName}
           ></TextField>
         </Grid>
         <Grid item>
@@ -50,7 +50,7 @@ const FormUserDetails = props => {
             placeholder="Enter Your Last Name"
             label="Last Name"
             onChange={handleChange('lastName')}
-            defaultValue={values.lastName}
+            value={values.lastName}
           ></TextField>
         </Grid>
         <Grid item>
@@ -58,15 +58,15 @@ const FormUserDetails = props => {
             placeholder="Enter Your Email"
             label="Email"
             onChange={handleChange('email')}
-            defaultValue={values.email}
+            value={values.email}
           ></TextField>
         </Grid>
         <Grid item>
           <Button
             variant="contained"
             color="primary"
-            className={classes.continueBtn}
-            onClick={handleContinue}
+            className={classes.btn}
+            onClick={nextStep}
           >
             Continue
           </Button>

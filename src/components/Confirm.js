@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 
@@ -12,62 +13,76 @@ const useStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar,
     marginBottom: '3em'
   },
-  continueBtn: {
-    margin: 15
+  btn: {
+    marginLeft: 25
   },
-  centerAppBarTitle: {
-    margin: 'auto'
+  title: {
+    flexGrow: 1,
+    textAlign: 'center'
   }
 }));
 
 const FormUserDetails = props => {
-  const {
-    values: { firstName, lastName, email, occupation, city, bio }
-  } = props;
+  const { nextStep, prevStep } = props;
+  const { firstName, lastName, email, occupation, city, bio } = props.values;
   const classes = useStyles();
-
-  const handleContinue = e => {
-    e.preventDefault();
-    props.nextStep();
-  };
-
-  const handleBack = e => {
-    e.preventDefault();
-    props.prevStep();
-  };
 
   return (
     <>
       <AppBar>
-        <Toolbar className={classes.centerAppBarTitle}>
-          <Typography>Confirm User Data</Typography>
+        <Toolbar>
+          <Typography className={classes.title}>Confirm User Data</Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.toolbarMargin} />
       <Grid container direction="column" alignItems="center" spacing={2}>
         <Grid item>
           <List>
-            <ListItemText primary="First Name" secondary={firstName} />
-            <ListItemText primary="Last Name" secondary={lastName} />
-            <ListItemText primary="Email" secondary={email} />
-            <ListItemText primary="Occupation" secondary={occupation} />
-            <ListItemText primary="City" secondary={city} />
-            <ListItemText primary="Bio" secondary={bio} />
+            <ListItem>
+              <ListItemText
+                align="center"
+                primary="First Name"
+                secondary={firstName}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                align="center"
+                primary="Last Name"
+                secondary={lastName}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText align="center" primary="Email" secondary={email} />
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                align="center"
+                primary="Occupation"
+                secondary={occupation}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText align="center" primary="City" secondary={city} />
+            </ListItem>
+            <ListItem>
+              <ListItemText align="center" primary="Bio" secondary={bio} />
+            </ListItem>
           </List>
         </Grid>
-        <Grid item>
+        <Grid item align="center">
           <Button
             variant="contained"
             className={classes.btn}
-            onClick={handleBack}
+            onClick={prevStep}
           >
             Back
           </Button>
           <Button
             variant="contained"
             color="primary"
-            className={classes.continueBtn}
-            onClick={handleContinue}
+            className={classes.btn}
+            onClick={nextStep}
           >
             Confirm
           </Button>

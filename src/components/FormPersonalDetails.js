@@ -14,30 +14,23 @@ const useStyles = makeStyles(theme => ({
   btn: {
     margin: 15
   },
-  centerAppBarTitle: {
-    margin: 'auto'
+  title: {
+    flexGrow: 1,
+    textAlign: 'center'
   }
 }));
 
 const FormPersonalDetails = props => {
-  const { values, handleChange } = props;
+  const { values, nextStep, prevStep, handleChange } = props;
   const classes = useStyles();
-
-  const handleContinue = e => {
-    e.preventDefault();
-    props.nextStep();
-  };
-
-  const handleBack = e => {
-    e.preventDefault();
-    props.prevStep();
-  };
 
   return (
     <>
       <AppBar>
-        <Toolbar className={classes.centerAppBarTitle}>
-          <Typography>Enter Personal Details</Typography>
+        <Toolbar>
+          <Typography className={classes.title}>
+            Enter Personal Details
+          </Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.toolbarMargin} />
@@ -47,7 +40,7 @@ const FormPersonalDetails = props => {
             placeholder="Enter Your Occupation"
             label="Occupation"
             onChange={handleChange('occupation')}
-            defaultValue={values.occupation}
+            value={values.occupation}
           ></TextField>
         </Grid>
         <Grid item>
@@ -55,7 +48,7 @@ const FormPersonalDetails = props => {
             placeholder="Enter Your City"
             label="City"
             onChange={handleChange('city')}
-            defaultValue={values.city}
+            value={values.city}
           ></TextField>
         </Grid>
         <Grid item>
@@ -63,14 +56,14 @@ const FormPersonalDetails = props => {
             placeholder="Enter Your Bio"
             label="Bio"
             onChange={handleChange('bio')}
-            defaultValue={values.bio}
+            value={values.bio}
           ></TextField>
         </Grid>
         <Grid item>
           <Button
             variant="contained"
             className={classes.btn}
-            onClick={handleBack}
+            onClick={prevStep}
           >
             Back
           </Button>
@@ -78,7 +71,7 @@ const FormPersonalDetails = props => {
             variant="contained"
             color="primary"
             className={classes.btn}
-            onClick={handleContinue}
+            onClick={nextStep}
           >
             Continue
           </Button>
